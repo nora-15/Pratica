@@ -54,10 +54,20 @@ class Cliente:
 
     def hacer_pedido(self, pedido):
         # TODO: Implementar la lógica para hacer un pedido
+        self.pedidos.append(pedido)
         print("hacer_pedido")
 
     def ver_pedidos(self):
         # TODO: Implementar la lógica para ver los pedidos del cliente
+        if len(self.pedidos) == 0:
+            print(f"{self.nombre} no tiene pedidos")
+        
+        else:
+            for pedido in self.pedidos:
+                print(pedido)
+                for plato in pedido.lista_de_platos:   
+                    print(f"    {plato}")
+        
         print("ver_pedidos")
 
 
@@ -70,18 +80,27 @@ class Restaurante:
 
     def agregar_plato_al_menu(self, plato):
         # TODO: Implementar la lógica para agregar un plato al menú
+        self.menu.append(plato)
         print("agregar_plato_al_menu")
 
     def registrar_pedido(self, pedido):
         # TODO: Implementar la lógica para registrar un pedido en el restaurante
+        self.pedidos.append(pedido)
         print("registrar_pedido")
 
     def actualizar_estado_pedido(self, cliente, nuevo_estado):
         # TODO: Implementar la lógica para actualizar el estado del pedido de un cliente
+        for pedido in self.pedidos:
+            if pedido.cliente == cliente:
+                pedido.cambiar_estado(nuevo_estado)
+                print(f"Estado  del pedido de {cliente.nombre} actualizado a {nuevo_estado}")
         print("actualizar_estado_pedido")
 
     def ver_menu(self):
         # TODO: Implementar la lógica para ver el menú del restaurante
+        print("     MENU    ")
+        for plato in self.menu:
+            print(plato)  
         print("ver_menu")
 
 
@@ -108,7 +127,7 @@ if __name__ == '__main__':
     pedido1 = Pedido(cliente1)
     pedido1.agregar_plato(plato1)
     pedido1.agregar_plato(plato2)
-    
+    cliente1.hacer_pedido(pedido1)
     pedido2 = Pedido(cliente2)
     pedido2.agregar_plato(plato3)
     
