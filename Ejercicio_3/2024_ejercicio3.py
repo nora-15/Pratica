@@ -1,3 +1,12 @@
+# Esquema con los elementos de cada clase:
+# Hay 4 clases:
+# Clase Plato, que contiene Nombre, Precio y Categoría
+# Clase Pedido, que contiene Cliente, lista de platos y Estado (Pendiente, Preparando y Entregado)
+# Clase Cliente, que contiene Nombre y Pedidos (lista de pedidos)
+# Clase Restaurante, que contiene Menú (lista de platos) y Pedidos (lista de pedidos)
+
+
+
 # Clase Plato
 class Plato:
 
