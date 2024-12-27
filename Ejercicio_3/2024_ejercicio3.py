@@ -25,6 +25,7 @@ class Pedido:
 
     def cambiar_estado(self, nuevo_estado):
         # TODO: Implementar la lógica para cambiar el estado del pedido
+        # Hay que tener en cuenta que el estado al que se cambie, sea uno de los tres que hay, para ello hay que hacer una condición
         lista_estado = ["Pendiente","Preparando","Entregado"]
         if nuevo_estado in lista_estado: 
             self.estado = nuevo_estado
@@ -34,9 +35,10 @@ class Pedido:
 
     def calcular_total(self):
         # TODO: Implementar la lógica para calcular el total del pedido
+        # hay que inicializar una variable a cero, que alamcenará el resultado total 
         preciototal = 0
         for plato in self.lista_de_platos:
-            preciototal = preciototal + plato.precio
+            preciototal = preciototal + plato.precio # con plato.precio,lo que hace es "ir directamente" al objeto tipo precio
         print(f"El precio total del pedido es {preciototal} euros")
         
         print("calcular_total")
@@ -59,9 +61,13 @@ class Cliente:
 
     def ver_pedidos(self):
         # TODO: Implementar la lógica para ver los pedidos del cliente
-        if len(self.pedidos) == 0:
+        #puede ser que la lista esté vacía, por eso, hay que unsar un condicional.
+        # la función len nos permite saber la longitud de la lista, y si es igual a 0; que imprima en consola "no tiene pedidos"
+        if len(self.pedidos) == 0: 
             print(f"{self.nombre} no tiene pedidos")
         
+        # por el contrario, hay que hacer un bucle para que recorra la lista "pedidos"; pero como self.pedido tiene la lista de platos,
+        # hay que hacer otro bucle para que recorra esa lista con todos los platos. (dentro de la lista de platos, se ecuentra "plato")
         else:
             for pedido in self.pedidos:
                 print(pedido)
@@ -90,16 +96,18 @@ class Restaurante:
 
     def actualizar_estado_pedido(self, cliente, nuevo_estado):
         # TODO: Implementar la lógica para actualizar el estado del pedido de un cliente
+        # lo primero, hay que centrarse en el cliente, para eso con el bucle "for" nos dirigimos al elemento de "pedidos"
+        # ese elemento es una lista que contiene "pedido"
         for pedido in self.pedidos:
-            if pedido.cliente == cliente:
-                pedido.cambiar_estado(nuevo_estado)
+            if pedido.cliente == cliente: # si el cliente de la clase pedido es igual a clase cliente (que tiene como atributos nombre y pedidos)
+                pedido.cambiar_estado(nuevo_estado) # la funcion cambiar_estado de la clase pedido; actualizarla a nuevo_estado
                 print(f"Estado  del pedido de {cliente.nombre} actualizado a {nuevo_estado}")
         print("actualizar_estado_pedido")
 
     def ver_menu(self):
         # TODO: Implementar la lógica para ver el menú del restaurante
         print("     MENU    ")
-        for plato in self.menu:
+        for plato in self.menu: # para cada plato del elemento "menu" (con lista_de_platos) de la clase restaurante, imprimir en consola plato
             print(plato)  
         print("ver_menu")
 
