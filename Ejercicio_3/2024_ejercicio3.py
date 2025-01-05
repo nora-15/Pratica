@@ -122,10 +122,52 @@ class Restaurante:
 
 
 if __name__ == '__main__':
-    # Ejemplo de uso del sistema
-    # Crear el restaurante
-    restaurante = Restaurante()
     
+    # Crear un objeto de la clase restaurante
+    restaurante = Restaurante()
+    menu = [["Hamburguesa", 8.50, "Comida"],["Refresco", 2.00, "Bebida"],["Pizza", 12.00, "Comida"]]
+    for elemento in menu:
+        restaurante.agregar_plato_al_menu(Plato(elemento[0],elemento[1],elemento[2]))
+    finish = False 
+    while finish == False: # Mientras finish sea false, entraría en el bucle
+        numero= int(input("Selecciona una opción:\n1. Hacer un pedido\n2. Ver el estado de mi pedido\n3. Ver menú\n4. Ver el precio de mi pedido\n5. Salir\n"))
+        
+        if numero == 1:
+            nombre = input("Indique su nombre: ")
+            cliente = Cliente(nombre) #creado un objeto de la clase cliente con el nombre psado en terminal
+            pedido = Pedido(cliente) #creado un objeto de la clase pedido con el objeto cliente creado anteriormente
+            elementopedido = input("Indique que quiere en su pedido separado por comas: ")
+            listapedido = elementopedido.split(", ")
+            existe = False
+            for elemento in listapedido:
+                for item in menu:
+                    if item[0] == elemento:
+                        existe = True           
+                        pedido.agregar_plato(Plato(item[0],item[1],item[2]))
+
+            if existe == False:
+                print("El plato no está en el menú.")
+            else: 
+                cliente.hacer_pedido(pedido)
+                restaurante.registrar_pedido(pedido) 
+        if numero == 2:
+            nombre = input("Introduce el nombre al que está hecho el pedido: ")
+            existe = False
+            for pedido in restaurante.pedidos:
+                if pedido.cliente.nombre == nombre:
+                    print(pedido)
+                    existe = True
+            if existe == False:
+                print("El cliente no ha hecho ningún pedido.")
+
+
+        if numero == 3:
+            restaurante.ver_menu()
+        if numero == 5:
+            finish = True
+
+    # Ejemplo de uso del sistema
+   
     # Crear platos
     plato1 = Plato("Hamburguesa", 8.50, "Comida")
     plato2 = Plato("Refresco", 2.00, "Bebida")
