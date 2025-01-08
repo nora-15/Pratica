@@ -163,12 +163,24 @@ if __name__ == '__main__':
 
         if numero == 3:
             restaurante.ver_menu()
+        
+        if numero == 4:
+            nombre = input("Introduce el nombre al que está hecho el pedido: ")
+            existe = False
+            for pedido in restaurante.pedidos:
+                if pedido.cliente.nombre == nombre:
+                    pedido.calcular_total()
+                    existe = True
+            if existe == False:
+                print("El cliente no ha hecho ningún pedido.")
+            
+        
         if numero == 5:
             finish = True
 
     # Ejemplo de uso del sistema
    
-    # Crear platos
+    """ # Crear platos
     plato1 = Plato("Hamburguesa", 8.50, "Comida")
     plato2 = Plato("Refresco", 2.00, "Bebida")
     plato3 = Plato("Pizza", 12.00, "Comida")
@@ -202,4 +214,4 @@ if __name__ == '__main__':
     
     # Cliente ve sus pedidos
     cliente1.ver_pedidos()
-    cliente2.ver_pedidos()
+    cliente2.ver_pedidos() """
